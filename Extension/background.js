@@ -8,6 +8,18 @@ const serverAdd = 'http://localhost:3000/'
 //     console.log("Value is " + result.key);
 // });
 
+// chrome.runtime.sendMessage({ data: "Hello from popup.js to background.js!" }, function(response) {
+//     console.log("Response received in popup.js:", response);
+//     // Do something with the received response
+//     document.getElementById('popup-content').textContent = response.data;
+//   });
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    console.log("Message received in background.js:", message);
+    let data = queryWord(message.data)
+    sendResponse({ data: data });
+  });
+
 async function queryWord(word){
     const token  = await auth();
         fetch(serverAdd.concat(`wordQ?token=${token}&word=${word}`))
@@ -19,7 +31,7 @@ async function queryWord(word){
                 })
             .then(data => {
                     const value = data; 
-                    chrome.runtime.sendMessage({ sigma: data });
+                    resolve(data);
                 })
             .catch(error => {
                     console.error('Error:', error.message);
