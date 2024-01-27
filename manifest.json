@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "LinkScrap",
+    "version": "1.0",
+    "description": "Pulls and formats information from linkedin job postings",
+    "permissions": ["activeTab"],
+    "icons": {
+        "16": "images/",
+        "32": "images/",
+        "48": "images/",
+        "128": "images/"
+    },
+    "action": {
+        "default_popup": "popup/popup.html"
+      }
+  }
