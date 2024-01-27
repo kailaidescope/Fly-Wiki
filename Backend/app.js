@@ -3,8 +3,10 @@ import axios from "axios"
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import { uuid } from 'uuidv4';
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 const port = 3000;
 const database = 'mongodb://127.0.0.1:27017/WikiFly'
 

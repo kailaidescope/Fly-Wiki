@@ -14,10 +14,10 @@ const serverAdd = 'http://localhost:3000/'
 //     document.getElementById('popup-content').textContent = response.data;
 //   });
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
     console.log("Message received in background.js:", message.data);
-    let data = queryWord(message.data)
-    sendResponse({ data: data });
+    let data = await queryWord(message.data)
+    sendResponse(data)
   });
 
 async function queryWord(word){
