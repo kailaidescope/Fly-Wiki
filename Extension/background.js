@@ -14,11 +14,11 @@ const serverAdd = 'http://localhost:3000/'
 //     document.getElementById('popup-content').textContent = response.data;
 //   });
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    console.log("Message received in background.js:", message);
-    let data = queryWord(message.data)
-    sendResponse({ data: data });
-});
+chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
+    console.log("Message received in background.js:", message.data);
+    let data = await queryWord(message.data)
+    sendResponse(data)
+  });
 
 async function queryWord(word){
     const token  = await auth();
