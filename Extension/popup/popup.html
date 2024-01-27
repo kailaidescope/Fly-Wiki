@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiFly</title>
+
+    <link rel="stylesheet" href="popup.css"/>
+</head>
+<body>
+    <div class="root">
+        <div class="searchbar">
+            <form action="search">
+                <input type="text" id="search" name="q" placeholder="Search Wikipedia...">
+                <input type="submit" value="Search">
+            </form>
+        </div> 
+        <div class="related">
+            <h1>Related Articles</h1>
+            <hbox class="related_articles">
+                <div class="hbox">
+                    <div class="hbox-item">
+                        <h3>Article Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div class="hbox-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="100" height="100">
+                    </div>
+                </div>
+            </hbox>
+        </div>
+        <div class="suggested">
+            <h1>Suggested Articles</h1>
+            <vbox class="suggested_articles"></vbox>
+        </div>
+    </div>
+</body>
+</html>

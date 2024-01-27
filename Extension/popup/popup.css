@@ -1,0 +1,25 @@
+:root {
+	--light: #EEE;
+	--dark: #252625;
+	--darker: #070807;
+	--pink: #EC4899;
+	--purple: #885CF6;
+	--yellow: #edc447;
+	--olive: #423E37;
+}
+
+.root {
+    min-width: 300px;
+}
+
+.hbox {
+    display: flex;
+    background-color: #885CF6;
+}
+
+.hbox-item {
+    min-height: 20%;
+    min-width: 20%;
+    padding: 10px;
+    margin: 5px;
+}
