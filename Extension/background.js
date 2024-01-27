@@ -15,7 +15,7 @@ const serverAdd = 'http://localhost:3000/'
 //   });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    console.log("Message received in background.js:", message);
+    console.log("Message received in background.js:", message.data);
     let data = queryWord(message.data)
     sendResponse({ data: data });
   });
