@@ -5,10 +5,10 @@
     "description": "Chrome extension that can query wikipedia for a summary of description of a piece of text highlighted by the user on any web page.",
     "permissions": ["activeTab"],
     "icons": {
-        "16": "images/",
-        "32": "images/",
-        "48": "images/",
-        "128": "images/"
+        "16": "images/WikiFly_icon16.png",
+        "32": "images/WikiFly_icon32.png",
+        "48": "images/WikiFly_icon48.png",
+        "128": "images/WikiFly_icon128.png"
     },
     "action": {
         "default_popup": "popup/popup.html"
