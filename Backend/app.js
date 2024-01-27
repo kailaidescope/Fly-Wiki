@@ -19,7 +19,7 @@ const chatgptAPI = axios.create({
     headers: {}
   });
 
-await mongoose.connect(database);
+/* await mongoose.connect(database); */
 
 const userSchema = new mongoose.Schema({
     token: String,

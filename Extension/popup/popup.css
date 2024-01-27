@@ -70,11 +70,11 @@ p {
     color: var(--light);
 }
 
-.rec-article {
+.hspace {
     margin: 0% 5% 0% 0%;
 }
 
-.sug-article {
+.vspace {
     margin: 0% 0% 5% 0%;
 }
 

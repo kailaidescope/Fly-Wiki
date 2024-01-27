@@ -15,10 +15,10 @@ const serverAdd = 'http://localhost:3000/'
 //   });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    console.log("Message received in background.js:", message.data);
+    console.log("Message received in background.js:", message);
     let data = queryWord(message.data)
     sendResponse({ data: data });
-  });
+});
 
 async function queryWord(word){
     const token  = await auth();
