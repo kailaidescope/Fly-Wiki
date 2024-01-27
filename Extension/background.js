@@ -8,8 +8,23 @@ const serverAdd = 'http://localhost:3000/'
 //     console.log("Value is " + result.key);
 // });
 
-function queryWord(){
-
+async function queryWord(word){
+    const token  = await auth();
+        fetch(serverAdd.concat(`wordQ?token=${token}&word=${word}`))
+            .then(response => {
+                if (!response.ok) {
+                        throw new Error('HTTP request failed with status:', response.status);
+                    }
+                    return response.json();
+                })
+            .then(data => {
+                    const value = data; 
+                    chrome.runtime.sendMessage({ sigma: data });
+                })
+            .catch(error => {
+                    console.error('Error:', error.message);
+                    reject(error);
+                });
 }
 
 function queryArticle(){
@@ -32,7 +47,7 @@ function auth() {
                     })
                     .then(data => {
                         console.log(data);
-                        const value = data.authToken; 
+                        const value = data; 
                         chrome.storage.local.set({ wikiAuthKey: value }, () => {
                             console.log("Value is set");
                             resolve(value);
