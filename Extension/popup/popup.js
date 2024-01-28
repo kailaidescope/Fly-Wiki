@@ -24,8 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log(message.data)
                 });
                 chrome.runtime.sendMessage({ data: searchBar.value });
-                
-                searchBar.value = "";
             }
         });
     }
@@ -44,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function() {
         relatedArticlesBox.removeChild(relatedArticleTemplate);
         relatedArticlesBox.removeChild(relatedArticlesDivider);
 
-        AddRelatedArticle("Hello world", "hello world!", "");
-        AddRelatedArticle("Renée Rap", "Woa, a baddie", "");
+        AddRelatedArticle("Hello world", "hello world!", "", "https://trello.com/b/u4HYcIQh/flywikithesenutz");
+        AddRelatedArticle("Le Petit Prince", "Adjust the targetURL variable to the URL you want to open in a new tab. Keep in mind that browser settings, extensions, or pop-up blockers may affect how new tabs are opened, and some users may have configured their browsers to open new tabs in the background.", "", "https://trello.com/b/u4HYcIQh/flywikithesenutz");
 
         console.log(relatedArticlesBox.children);
     }
@@ -55,14 +53,19 @@ document.addEventListener("DOMContentLoaded", function() {
         suggestedArticlesBox.removeChild(suggestedArticleTemplate);
         suggestedArticlesBox.removeChild(suggestedArticlesDivider);
 
-        AddSuggestedArticle("EEYYA im on tv", "family guy the Godfather episode", "");
-        AddSuggestedArticle("Hol up there", "damnnnn", "");
+        AddSuggestedArticle("EEYYA im on tv", "family guy the Godfather episode", "", "");
+        AddSuggestedArticle("Hol up there", "damnnnn", "", "https://trello.com/b/u4HYcIQh/flywikithesenutz");
 
         console.log(suggestedArticlesBox.children);
     }
 });
 
-function CreateRelatedArticle(title, text, image)
+function UpdateArticles(title, description, link)
+{
+
+}
+
+function CreateRelatedArticle(title, text, image, link)
 {
     if(!relatedArticleTemplate)
     {
@@ -71,20 +74,25 @@ function CreateRelatedArticle(title, text, image)
 
     const article = relatedArticleTemplate.cloneNode(true);
 
+    article.addEventListener('click', () => {
+        // Redirect to the URL
+        window.open(link, '_blank');
+    });
+
     article.children.item(0).children.item(0).textContent = title;
     article.children.item(0).children.item(1).textContent = text;
 
     return article;
 }
 
-function AddRelatedArticle(title, text, image)
+function AddRelatedArticle(title, text, image, link)
 {
     if(!relatedArticlesBox || !relatedArticlesDivider)
     {
         throw new Error("No related article container or divider initialized.");
     }
 
-    let rel = CreateRelatedArticle(title, text, image);
+    let rel = CreateRelatedArticle(title, text, image, link);
 
     if(relatedArticlesBox.children.length > 0)
     {
@@ -93,7 +101,7 @@ function AddRelatedArticle(title, text, image)
     relatedArticlesBox.appendChild(rel);
 }
 
-function CreateSuggestedArticle(title, text, image)
+function CreateSuggestedArticle(title, text, image, link)
 {
     if(!suggestedArticleTemplate)
     {
@@ -102,20 +110,25 @@ function CreateSuggestedArticle(title, text, image)
 
     const article = suggestedArticleTemplate.cloneNode(true);
 
+    article.addEventListener('click', () => {
+        // Redirect to the URL
+        window.open(link, '_blank');
+    });
+
     article.children.item(0).children.item(0).textContent = title;
     article.children.item(0).children.item(1).textContent = text;
 
     return article;
 }
 
-function AddSuggestedArticle(title, text, image)
+function AddSuggestedArticle(title, text, image, link)
 {
     if(!suggestedArticlesBox || !suggestedArticlesDivider)
     {
         throw new Error("No suggested article container or divider initialized.");
     }
 
-    let sug = CreateSuggestedArticle(title, text, image);
+    let sug = CreateSuggestedArticle(title, text, image, link);
 
     if(suggestedArticlesBox.children.length > 0)
     {
