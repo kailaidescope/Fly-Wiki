@@ -1,12 +1,12 @@
-const relatedArticlesBox = `
-<div class="related">
+const relatedArticlesBox_template = `
+<div class="related" id="related-box>
     <h1>Related Articles</h1>
     <div class="related-articles" id="related-articles-box">
     </div>
 </div>
 `;
 
-const relatedArticleTemplate = `
+const relatedArticleTemplate_template = `
 <div class="rec-article" id="related-article">
     <div class="hbox-item">
         <h2>Article Title</h2>
@@ -18,11 +18,45 @@ const relatedArticleTemplate = `
 </div>
 `;
 
-const relatedArticlesDivider = `
+const relatedArticleDivider_template = `
 <div class="hspace" id="horizontal-space"></div>
 `;
 
+let relatedArticlesBox = document.createElement("div");
+    relatedArticlesBox.appendChild(document.createElement("h1"));
+    relatedArticlesBox.children.item(0);
+let relatedArticleTemplate;
+let relatedArticleDivider;
+
 let overlay = null;
+
+function init()
+{
+    // Create a wrapper div and set its inner HTML
+    let wrapperDiv = document.createElement('div');
+    wrapperDiv.innerHTML = relatedArticlesBox_template;
+
+    // Extract the specific element you want
+    relatedArticlesBox = wrapperDiv.querySelector('#related-box');
+
+    // Create a wrapper div and set its inner HTML
+    wrapperDiv = document.createElement('div');
+    wrapperDiv.innerHTML = relatedArticleTemplate_template;
+
+    // Extract the specific element you want
+    relatedArticlesTemplate = wrapperDiv.querySelector('#related-article');
+
+    // Create a wrapper div and set its inner HTML
+    wrapperDiv = document.createElement('div');
+    wrapperDiv.innerHTML = relatedArticleDivider_template;
+
+    // Extract the specific element you want
+    relatedArticleDivider = wrapperDiv.querySelector('#horizontal-space');
+
+    console.log(relatedArticlesBox);
+    console.log(relatedArticleTemplate);
+    console.log(relatedArticleDivider);
+}
 
 function UpdateArticles(title, description, link)
 {
@@ -45,9 +79,6 @@ function createOverlay(text, top, left) {
     overlay.style.position = "absolute";
     overlay.style.top = Math.floor(top).toString()+"px";
     overlay.style.left = Math.floor(left).toString()+"px";
-    overlay.style.width = "100px";
-    overlay.style.height = "100px";
-    overlay.style.background = "rgba(255, 0, 0, 0.5)";
     overlay.style.zIndex = "1000";
 
     // Append the overlay to the body
@@ -90,3 +121,4 @@ document.addEventListener('mouseup', function () {
 
 // Create the overlay when the content script is injected
 //createOverlay();
+init();

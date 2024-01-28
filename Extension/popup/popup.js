@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     chrome.runtime.onMessage.addListener(async (message,sender,sendResponse)=>{
         console.log(message.data)
         
-        UpdateArticles(message.title, message.description, message.link);
+        UpdateArticles(message);
     });
 
     relatedArticlesBox = document.getElementById("related-articles-box");
@@ -82,13 +82,15 @@ function ClearArticles()
     }
 }
 
-function UpdateArticles(title, description, link)
+function UpdateArticles(articleJSON)
 {
     ClearArticles();
 
     if(relatedArticlesBox)
     {
-        AddRelatedArticle(title, description, "", link);
+        AddRelatedArticle(articleJSON.ans.description, articleJSON.ans.description, "", articleJSON.ans.description);
+        AddRelatedArticle(articleJSON.L1.title, articleJSON.L1.description , "", articleJSON.L1.description);
+        AddRelatedArticle(articleJSON.L2.title, articleJSON.L2.description , "", articleJSON.L2.description);
 
         console.log(relatedArticlesBox.children);
     }
