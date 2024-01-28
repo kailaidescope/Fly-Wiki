@@ -1,3 +1,27 @@
+const relatedArticlesBox = `
+<div class="related">
+    <h1>Related Articles</h1>
+    <div class="related-articles" id="related-articles-box">
+    </div>
+</div>
+`;
+
+const relatedArticleTemplate = `
+<div class="rec-article" id="related-article">
+    <div class="hbox-item">
+        <h2>Article Title</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div class="hbox-item-img">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="50" height="50">
+    </div>
+</div>
+`;
+
+const relatedArticlesDivider = `
+<div class="hspace" id="horizontal-space"></div>
+`;
+
 let overlay = null;
 
 function UpdateArticles(title, description, link)
