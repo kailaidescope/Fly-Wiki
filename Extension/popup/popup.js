@@ -20,15 +20,25 @@ document.addEventListener("DOMContentLoaded", function() {
             if (event.key === "Enter") 
             {
                 console.log("Input: ",searchBar.value);
-                chrome.runtime.onMessage.addListener(async (message,sender,sendResponse)=>{
-                    console.log(message.data)
+                chrome.runtime.sendMessage({ data: searchBar.value }, (response)=>{
+                    console.log(response);
                 });
-                chrome.runtime.sendMessage({ data: searchBar.value });
                 
                 searchBar.value = "";
             }
         });
     }
+
+    chrome.runtime.onMessage.addListener(async (message,sender,sendResponse)=>{
+        console.log(message)
+    });
+
+    //Message is = to answer
+    // let answer = {
+    //     title: resData.title,
+    //     link: resData.content_urls.desktop.page,
+    //     description: resData.extract
+    // }
 
     relatedArticlesBox = document.getElementById("related-articles-box");
     suggestedArticlesBox = document.getElementById("suggested-articles-box");

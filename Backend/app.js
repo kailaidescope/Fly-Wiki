@@ -18,20 +18,21 @@ const port = 3000;
 const database = 'mongodb://127.0.0.1:27017/WikiFly'
 
 const wikiAPI = axios.create({
-    baseURL: 'https://en.wikipedia.org/api/rest_v1/page/summary/',
+    baseURL: 'https://en.wikipedia.org/api/rest_v1/page/',
     headers: {}
   });
 
-const chatgptAPI = axios.create({
-    baseURL: 'https://some-domain.com/api/',
-    timeout: 1000,
-    headers: {}
-  });
+// const chatgptAPI = axios.create({
+//     baseURL: 'https://some-domain.com/api/',
+//     timeout: 1000,
+//     headers: {}
+//   });
 
-/* await mongoose.connect(database); */
+await mongoose.connect(database); 
 
 const userSchema = new mongoose.Schema({
     token: String,
+    wordQlen: Number,
     wordQs: [{ id : Number, word: String}]
 });
 
@@ -44,8 +45,24 @@ const User = mongoose.model(
 app.get("/wordQ", async (req, res) => {
     let word = req.query.word;
     let token = req.query.token;
-    let resData = await wikiAPI.get(`/${word}`);
-    res.send({data : resData.data.extract});
+    let apiRes = await wikiAPI.get(`summary/${word}`);
+    if (apiRes != null){
+        let resData = apiRes.data;
+        let answer = {
+            title: resData.title,
+            link: resData.content_urls.desktop.page,
+            description: resData.extract
+        }
+    res.send({data : answer});
+    }else{
+        res.send({data: {title: "Could not find article."}})
+    }
+    //add word to the database
+    const balls = await User.findOne({ token: token});
+    if(balls != null){
+        balls.wordQs.push({id: balls.wordQlen, word: word});
+        balls.wordQlen = balls.wordQlen + 1;
+    }
 })
 
 //(to be changed) Query for Articles 
@@ -55,7 +72,6 @@ app.get("/articleQ", async (req, res) => {
 
 // create user authorization token for user who hasn't got one
 app.get("/auth/tokenReq", async (req, res) => {
-
     while(true){
         //create new token 
         const newToken = uuid();
@@ -63,6 +79,12 @@ app.get("/auth/tokenReq", async (req, res) => {
         const balls = await User.findOne({ token: newToken});
         //if unique send back to user & create user entry
         if(balls === null){
+            const newUser = new User({
+                token: newToken,
+                wordQlen:0,
+                wordQs: [] 
+              }); 
+            await newUser.save();
             res.send({token:newToken});
             break;
         }
