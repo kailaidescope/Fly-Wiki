@@ -23,40 +23,10 @@ const relatedArticleDivider_template = `
 `;
 
 let relatedArticlesBox = document.createElement("div");
-    relatedArticlesBox.appendChild(document.createElement("h1"));
-    relatedArticlesBox.children.item(0).textContent = "Related Articles";
 let relatedArticleTemplate;
 let relatedArticleDivider;
 
 let overlay = null;
-
-function init()
-{
-    // Create a wrapper div and set its inner HTML
-    let wrapperDiv = document.createElement('div');
-    wrapperDiv.innerHTML = relatedArticlesBox_template;
-
-    // Extract the specific element you want
-    relatedArticlesBox = wrapperDiv.querySelector('#related-box');
-
-    // Create a wrapper div and set its inner HTML
-    wrapperDiv = document.createElement('div');
-    wrapperDiv.innerHTML = relatedArticleTemplate_template;
-
-    // Extract the specific element you want
-    relatedArticlesTemplate = wrapperDiv.querySelector('#related-article');
-
-    // Create a wrapper div and set its inner HTML
-    wrapperDiv = document.createElement('div');
-    wrapperDiv.innerHTML = relatedArticleDivider_template;
-
-    // Extract the specific element you want
-    relatedArticleDivider = wrapperDiv.querySelector('#horizontal-space');
-
-    console.log(relatedArticlesBox);
-    console.log(relatedArticleTemplate);
-    console.log(relatedArticleDivider);
-}
 
 function UpdateArticles(title, description, link)
 {
@@ -71,19 +41,16 @@ function createOverlay(text, top, left) {
         document.body.removeChild(overlay);
     }
 
-    overlay = relatedArticlesBox.cloneNode(true);
-    /* overlay = document.createElement("div");
+    overlay = document.createElement("div");
     overlay.id = "webPageOverlay";
-    overlay.textContent = text; */
-
-    overlay.rel = 'stylesheet';
-    overlay.href = chrome.extension.getURL('content.css');
+    overlay.textContent = text;
     
     // Apply styles to the overlay
     overlay.style.position = "absolute";
     overlay.style.top = Math.floor(top).toString()+"px";
     overlay.style.left = Math.floor(left).toString()+"px";
     overlay.style.zIndex = "1000";
+    overlay.background = "rgba(100, 0, 50, 0.5)";
 
     // Append the overlay to the body
     document.body.appendChild(overlay);
@@ -117,9 +84,23 @@ document.addEventListener('mouseup', function () {
         console.log("Right: " + rect.right);
         console.log("Width: " + rect.width);
         console.log("Height: " + rect.height); */
+
+        chrome.runtime.sendMessage({ data: highlightedText }, (response)=>{
+            console.log(response);
+        });
+
         createOverlay(highlightedText, rect.top+rect.height, rect.left);
     } else {
         removeOverlay();
+    }
+});
+
+chrome.runtime.onMessage.addListener(async (message,sender,sendResponse)=>{
+    console.log(message.data)
+
+    if(overlay != null)
+    {
+        overlay.textContent = message.ans.title + "\n" + message.ans.description;
     }
 });
 
