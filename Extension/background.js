@@ -1,4 +1,4 @@
-const serverAdd = 'http://localhost:3000/'
+const serverAdd = 'http://localhost:3000/';
 
 // chrome.storage.local.set({ key: value }).then(() => {
 //     console.log("Value is set");
@@ -16,27 +16,17 @@ const serverAdd = 'http://localhost:3000/'
 
 chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
     console.log("Message received in background.js:", message.data);
-    let data = await queryWord(message.data)
-    sendResponse(data)
+    //let data = (await queryWord(message.data)).json();
+    let response = await queryWord(message.data);
+    let data = await response.json();
+    //console.log(data.data);
+    //sendResponse('test');
+    chrome.runtime.sendMessage({data:data.data});
   });
 
 async function queryWord(word){
-    const token  = await auth();
-        fetch(serverAdd.concat(`wordQ?token=${token}&word=${word}`))
-            .then(response => {
-                if (!response.ok) {
-                        throw new Error('HTTP request failed with status:', response.status);
-                    }
-                    return response.json();
-                })
-            .then(data => {
-                    const value = data; 
-                    resolve(data);
-                })
-            .catch(error => {
-                    console.error('Error:', error.message);
-                    reject(error);
-                });
+    const token = 'test';
+    return fetch(serverAdd.concat(`wordQ?token=${token}&word=${word}`));
 }
 
 function queryArticle(){
@@ -50,12 +40,13 @@ function auth() {
             if (result.wikiAuthKey !== undefined) {
                 resolve(result.wikiAuthKey);
             } else {
+                //serverAdd.concat('auth/tokenReq')
                 fetch(serverAdd.concat('auth/tokenReq'))
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('HTTP request failed with status:', response.status);
                         }
-                        return response.json();
+                        //return response.json();
                     })
                     .then(data => {
                         console.log(data);

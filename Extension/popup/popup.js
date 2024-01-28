@@ -6,13 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
         searchBar.addEventListener("keypress",async function(event) {
             if (event.key === "Enter") {
                 console.log("Input: ",searchBar.value);
-                chrome.runtime.sendMessage({ data: searchBar.value }, function(response) {
-                    console.log("Response received in popup.js: ", response);
-                        
-                    // Do something with the received response
-    
-                    //document.getElementById('popup-content').textContent = response.data;
+                chrome.runtime.onMessage.addListener(async (message,sender,sendResponse)=>{
+                    console.log(message.data)
                 });
+                chrome.runtime.sendMessage({ data: searchBar.value });
+                
                 searchBar.value = "";
             }
         });

@@ -6,7 +6,14 @@ import { uuid } from 'uuidv4';
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+    origin: 'chrome-extension://ogjcjamkpgdcaceljfmegbdgnjlpadaf',
+    methods: 'GET', // Specify the allowed HTTP methods
+    allowedHeaders: 'Content-Type', // Specify the allowed headers
+  };
+
+app.use(cors(corsOptions));
 const port = 3000;
 const database = 'mongodb://127.0.0.1:27017/WikiFly'
 
@@ -35,25 +42,10 @@ const User = mongoose.model(
 
 // Query for word wiki summary
 app.get("/wordQ", async (req, res) => {
-    let word = req.params.word;
-    let token = req.params.token;
+    let word = req.query.word;
+    let token = req.query.token;
     let resData = await wikiAPI.get(`/${word}`);
-
-    // User.findOneAndUpdate(
-    //     { 'token': token }, // Find the member with the specific token
-    //     { $push: { wordQs: {id : 1, word: word} } }, // Append the new wordQ to the workQs array
-    //     (err, updatedUser) => {
-    //       if (err) {
-    //         console.error('Error updating user:', err);
-    //         // Handle the error as needed
-    //       } else {
-    //         console.log('Updated user:', updatedUser);
-    //         // Handle the updated user as needed
-    //       }
-    //     }
-    //   );
-
-    res.send(resData.data.extract);
+    res.send({data : resData.data.extract});
 })
 
 //(to be changed) Query for Articles 
@@ -71,7 +63,7 @@ app.get("/auth/tokenReq", async (req, res) => {
         const balls = await User.findOne({ token: newToken});
         //if unique send back to user & create user entry
         if(balls === null){
-            res.send(newToken);
+            res.send({token:newToken});
             break;
         }
     }
