@@ -9,7 +9,11 @@
 </head>
 <body>
     <div class="root">
-        <h1 class="title">Wiki-Fly</h1>
+        <div class="titlebox">
+            <div><h1 class="title">Wiki</h1></div>
+            <div><img src="../images/WikiFly_icon128.png" alt="Wiki-Fly logo" width="40" height="40"></div>
+            <div><h1 class="title">Fly</h1></div>
+        </div>
         <div class="search">
             <form class="search-form" action="#">
                 <input type="text" id="search-bar" placeholder="Search Wikipedia...">
@@ -17,52 +21,44 @@
         </div> 
         <div class="related">
             <h1>Related Articles</h1>
-            <div class="related-articles">
-                <div class="rec-article">
-                    <div class="hbox-item">
-                        <h2>Article Title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="hbox-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="100" height="100">
-                    </div>
-                </div>
-                <div class="hspace"></div>
-                <div class="rec-article">
-                    <div class="hbox-item">
-                        <h2>Article Title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="hbox-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="100" height="100">
-                    </div>
-                </div>
+            <div class="related-articles" id="related-articles-box">
             </div>
         </div>
         <div class="suggested">
             <h1>Suggested Articles</h1>
-            <div class="suggested-articles">
-                <div class="sug-article">
-                    <div class="hbox-item">
-                        <h2>Article Title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="hbox-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="100" height="100">
-                    </div>
-                </div>
-                <div class="vspace"></div>
-                <div class="sug-article">
-                    <div class="hbox-item">
-                        <h2>Article Title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="hbox-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="100" height="100">
-                    </div>
-                </div>
+            <div class="suggested-articles" id="suggested-articles-box">
             </div>
         </div>
     </div>
+
+    <!-- Template elements -->
+    <template id="related-article">
+        <div class="rec-article">
+            <div class="hbox-item">
+                <h2>Article Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="hbox-item">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="50" height="50">
+            </div>
+        </div>
+    </template>
+    <template id="horizontal-space">
+        <div class="hspace"></div>
+    </template>
+    <template id="suggested-article">
+        <div class="sug-article">
+            <div class="hbox-item">
+                <h2>Article Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="hbox-item">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia logo" width="50" height="50">
+            </div>
+        </div>
+    </template>
+    <template id="vertical-space">
+        <div class="vspace"></div>
+    </template>
 </body>
 </html>
