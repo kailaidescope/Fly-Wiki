@@ -4,6 +4,10 @@
     "version": "1.0",
     "description": "Chrome extension that can query wikipedia for a summary of description of a piece of text highlighted by the user on any web page.",
     "permissions": ["activeTab","storage"],
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["content/content.js"]
+    }],
     "icons": {
         "16": "images/WikiFly_icon16.png",
         "32": "images/WikiFly_icon32.png",
