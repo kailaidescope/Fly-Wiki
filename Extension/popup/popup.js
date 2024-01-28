@@ -71,14 +71,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function ClearArticles()
 {
-    for(i = 0; i < relatedArticlesBox.children.length; i++)
+    while (relatedArticlesBox.children.length > 0)
     {
-        relatedArticlesBox.removeChild(relatedArticlesBox.children.item(i));
+        relatedArticlesBox.removeChild(relatedArticlesBox.children.item(0));
     }
 
-    for(i = 0; i < suggestedArticlesBox.children.length; i++)
+    while (suggestedArticlesBox.children.length > 0)
     {
-        suggestedArticlesBox.removeChild(suggestedArticlesBox.children.item(i));
+        suggestedArticlesBox.removeChild(suggestedArticlesBox.children.item(0));
     }
 }
 
@@ -88,9 +88,9 @@ function UpdateArticles(articleJSON)
 
     if(relatedArticlesBox)
     {
-        AddRelatedArticle(articleJSON.ans.description, articleJSON.ans.description, "", articleJSON.ans.description);
-        AddRelatedArticle(articleJSON.L1.title, articleJSON.L1.description , "", articleJSON.L1.description);
-        AddRelatedArticle(articleJSON.L2.title, articleJSON.L2.description , "", articleJSON.L2.description);
+        AddRelatedArticle(articleJSON.ans.title, articleJSON.ans.description, "", articleJSON.ans.link);
+        AddRelatedArticle(articleJSON.L1.title, articleJSON.L1.description , "", articleJSON.L1.link);
+        AddRelatedArticle(articleJSON.L2.title, articleJSON.L2.description , "", articleJSON.L2.link);
 
         console.log(relatedArticlesBox.children);
     }

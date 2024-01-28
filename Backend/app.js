@@ -49,24 +49,34 @@ app.get("/wordQ", async (req, res) => {
     let apiResR = await wikiAPI.get(`related/${word}`);
     if (apiResQ != null){
         let resDataQ = apiResQ.data;
-        let resDataR = apiResR.data;
+        let resDataR = apiResR.data.pages;
         let answer = {
             ans: {
                 title: resDataQ.title,
                 link: resDataQ.content_urls.desktop.page,
                 description: resDataQ.extract
+            },
+            L1:{
+                title: resDataR[0].title,
+                link: resDataR[0].content_urls.desktop.page,
+                description: resDataR[0].extract
+            },
+            L2:{
+                title: resDataR[1].title,
+                link: resDataR[1].content_urls.desktop.page,
+                description: resDataR[1].extract
             }
         }
-        for (let i = 0; i < resDataR.length; i++) {
-            const currentObject = resDataR[i];
+        // for (let i = 0; i < resDataR.length; i++) {
+        //     const currentObject = resDataR[i];
           
-            // Append the current object to the resultObject using a key based on the 'id' property
-            answer[`L${i}`] = {
-                title: currentObject.title,
-                link: currentObject.content_urls.desktop.page,
-                description: currentObject.extract
-            };
-          }
+        //     // Append the current object to the resultObject using a key based on the 'id' property
+        //     answer[`L${i}`] = {
+        //         title: currentObject.title,
+        //         link: currentObject.content_urls.desktop.page,
+        //         description: currentObject.extract
+        //     };
+        //   }
         res.send({data : answer});
     }else{
         res.send({data: {title: "Could not find article."}})
