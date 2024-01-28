@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
     suggestedArticleTemplate = document.getElementById("suggested-article");
     suggestedArticlesDivider = document.getElementById("vertical-space");
 
+    ClearArticles();
+
     /* if(relatedArticlesBox)
     {
         relatedArticlesBox.removeChild(relatedArticleTemplate);
@@ -67,15 +69,25 @@ document.addEventListener("DOMContentLoaded", function() {
     } */
 });
 
+function ClearArticles()
+{
+    for(i = 0; i < relatedArticlesBox.children.length; i++)
+    {
+        relatedArticlesBox.removeChild(relatedArticlesBox.children.item(i));
+    }
+
+    for(i = 0; i < suggestedArticlesBox.children.length; i++)
+    {
+        suggestedArticlesBox.removeChild(suggestedArticlesBox.children.item(i));
+    }
+}
+
 function UpdateArticles(title, description, link)
 {
+    ClearArticles();
+
     if(relatedArticlesBox)
     {
-        for(i = 0; i < relatedArticlesBox.children.length; i++)
-        {
-            relatedArticlesBox.removeChild(relatedArticlesBox.children.item(i));
-        }
-
         AddRelatedArticle(title, description, "", link);
 
         console.log(relatedArticlesBox.children);
@@ -83,11 +95,6 @@ function UpdateArticles(title, description, link)
 
     if(suggestedArticlesBox)
     {
-        for(i = 0; i < suggestedArticlesBox.children.length; i++)
-        {
-            suggestedArticlesBox.removeChild(suggestedArticlesBox.children.item(i));
-        }
-
         //AddSuggestedArticle("EEYYA im on tv", "family guy the Godfather episode", "", "");
 
         console.log(suggestedArticlesBox.children);
