@@ -30,15 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     chrome.runtime.onMessage.addListener(async (message,sender,sendResponse)=>{
-        console.log(message)
+        console.log(message.data)
+        
+        UpdateArticles(message.title, message.description, message.link);
     });
-
-    //Message is = to answer
-    // let answer = {
-    //     title: resData.title,
-    //     link: resData.content_urls.desktop.page,
-    //     description: resData.extract
-    // }
 
     relatedArticlesBox = document.getElementById("related-articles-box");
     suggestedArticlesBox = document.getElementById("suggested-articles-box");
@@ -49,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
     suggestedArticleTemplate = document.getElementById("suggested-article");
     suggestedArticlesDivider = document.getElementById("vertical-space");
 
-    if(relatedArticlesBox)
+    /* if(relatedArticlesBox)
     {
         relatedArticlesBox.removeChild(relatedArticleTemplate);
         relatedArticlesBox.removeChild(relatedArticlesDivider);
@@ -69,12 +64,34 @@ document.addEventListener("DOMContentLoaded", function() {
         AddSuggestedArticle("Hol up there", "damnnnn", "", "https://trello.com/b/u4HYcIQh/flywikithesenutz");
 
         console.log(suggestedArticlesBox.children);
-    }
+    } */
 });
 
 function UpdateArticles(title, description, link)
 {
+    if(relatedArticlesBox)
+    {
+        for(i = 0; i < relatedArticlesBox.children.length; i++)
+        {
+            relatedArticlesBox.removeChild(relatedArticlesBox.children.item(i));
+        }
 
+        AddRelatedArticle(title, description, "", link);
+
+        console.log(relatedArticlesBox.children);
+    }
+
+    if(suggestedArticlesBox)
+    {
+        for(i = 0; i < suggestedArticlesBox.children.length; i++)
+        {
+            suggestedArticlesBox.removeChild(suggestedArticlesBox.children.item(i));
+        }
+
+        //AddSuggestedArticle("EEYYA im on tv", "family guy the Godfather episode", "", "");
+
+        console.log(suggestedArticlesBox.children);
+    }
 }
 
 function CreateRelatedArticle(title, text, image, link)
