@@ -45,15 +45,29 @@ const User = mongoose.model(
 app.get("/wordQ", async (req, res) => {
     let word = req.query.word;
     let token = req.query.token;
-    let apiRes = await wikiAPI.get(`summary/${word}`);
-    if (apiRes != null){
-        let resData = apiRes.data;
+    let apiResQ = await wikiAPI.get(`summary/${word}`);
+    let apiResR = await wikiAPI.get(`related/${word}`);
+    if (apiResQ != null){
+        let resDataQ = apiResQ.data;
+        let resDataR = apiResR.data;
         let answer = {
-            title: resData.title,
-            link: resData.content_urls.desktop.page,
-            description: resData.extract
+            ans: {
+                title: resDataQ.title,
+                link: resDataQ.content_urls.desktop.page,
+                description: resDataQ.extract
+            }
         }
-    res.send({data : answer});
+        for (let i = 0; i < resDataR.length; i++) {
+            const currentObject = resDataR[i];
+          
+            // Append the current object to the resultObject using a key based on the 'id' property
+            answer[`L${i}`] = {
+                title: currentObject.title,
+                link: currentObject.content_urls.desktop.page,
+                description: currentObject.extract
+            };
+          }
+        res.send({data : answer});
     }else{
         res.send({data: {title: "Could not find article."}})
     }
