@@ -24,7 +24,7 @@ const relatedArticleDivider_template = `
 
 let relatedArticlesBox = document.createElement("div");
     relatedArticlesBox.appendChild(document.createElement("h1"));
-    relatedArticlesBox.children.item(0);
+    relatedArticlesBox.children.item(0).textContent = "Related Articles";
 let relatedArticleTemplate;
 let relatedArticleDivider;
 
@@ -71,9 +71,13 @@ function createOverlay(text, top, left) {
         document.body.removeChild(overlay);
     }
 
-    overlay = document.createElement("div");
+    overlay = relatedArticlesBox.cloneNode(true);
+    /* overlay = document.createElement("div");
     overlay.id = "webPageOverlay";
-    overlay.textContent = text;
+    overlay.textContent = text; */
+
+    overlay.rel = 'stylesheet';
+    overlay.href = chrome.extension.getURL('content.css');
     
     // Apply styles to the overlay
     overlay.style.position = "absolute";
@@ -121,4 +125,4 @@ document.addEventListener('mouseup', function () {
 
 // Create the overlay when the content script is injected
 //createOverlay();
-init();
+
