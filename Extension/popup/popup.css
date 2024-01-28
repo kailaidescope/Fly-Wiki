@@ -1,33 +1,86 @@
 :root {
 	--light: #EEE;
-	--dark: #252625;
+	--dark: #2E2E2E;
 	--darker: #070807;
+    --darker-faded: #07080734;
 	--pink: #EC4899;
 	--purple: #885CF6;
+    --dark-purple: #885CF628;
 	--yellow: #edc447;
 	--olive: #423E37;
     --g1-1: #B895E5;
     --g1-2: #7977D8;
     --popup-bg: #7977D828;
+    --popup-section-bg: #aec0ff80;
 }
 
 body {
     width: 300px;
-    background-color: var(--popup-bg);
+    background-image: linear-gradient(to top, var(--popup-bg), var(--g1-2));
     padding: 0%;
     margin: 0%;
 }
 
 h1 {
     text-align: center;
+    color: var(--dark);
+    font-style: italic;
+    font-weight: 400;
+    margin: 0% 0% 2% 0%;
+}
+
+h2 {
+    font-weight: 900;
+    font-size: 25px;
+    margin: 10% 0% 0% 0%;
 }
 
 p {
     text-align: left;
+    margin: 0% 0% 10% 0%;
+}
+
+img {
+    margin: 0%;
+    align-self: center;
+    justify-self: center;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    border: 2px solid var(--dark-purple);
+    border-radius: 15px;
+    font-family: system-ui, sans-serif;
+    font-style: italic;
+    color: #070807;
+    padding-left: 30px;
+    background-image: url('../images/search_icon.png');
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 3% 50%;
+}
+
+.title {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    color: var(--light)
+}
+
+.titlebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: min-content;
+    margin: 0%;
+    padding: 0%;
 }
 
 .search,.related,.suggested {
-    background-color: var(--popup-bg);
+    background-color: var(--popup-section-bg);
+    border-color: var(--light);
+    border-style: solid;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -35,11 +88,13 @@ p {
     align-items: center;
     margin: 2%;
     padding: 4%;
+    box-shadow: 0 6px 8px var(--darker-faded);
 }
 
 .root {
     margin: 0%;
     padding: 5%;
+    background-color: transparent;
 }
 
 .search-form {
@@ -70,17 +125,16 @@ p {
     color: var(--light);
 }
 
-.rec-article {
+.hspace {
     margin: 0% 5% 0% 0%;
 }
 
-.sug-article {
+.vspace {
     margin: 0% 0% 5% 0%;
 }
 
 .hbox-item {
-    flex: 0 0 40%;
-    margin: 0% 0% 0% 5%;
+    margin: 0% 5%;
 }
 
 img {
