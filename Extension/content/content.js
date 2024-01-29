@@ -50,7 +50,7 @@ function createOverlay(text, top, left) {
     overlay.style.top = Math.floor(top).toString()+"px";
     overlay.style.left = Math.floor(left).toString()+"px";
     overlay.style.zIndex = "1000";
-    overlay.background = "rgba(100, 0, 50, 0.5)";
+    overlay.background = "#B895E5";
 
     // Append the overlay to the body
     document.body.appendChild(overlay);
