@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     ClearArticles();
 
+    //ExampleArticles();
+
     /* if(relatedArticlesBox)
     {
         relatedArticlesBox.removeChild(relatedArticleTemplate);
@@ -92,12 +94,37 @@ function UpdateArticles(articleJSON)
         AddRelatedArticle(articleJSON.L1.title, articleJSON.L1.description , "", articleJSON.L1.link);
         AddRelatedArticle(articleJSON.L2.title, articleJSON.L2.description , "", articleJSON.L2.link);
 
+        //AddRelatedArticle("Water Bottle", "A water bottle is a container that is used to hold liquids, mainly water." , "", "https://en.wikipedia.org/wiki/Water_bottle");
+        //AddRelatedArticle("Panopticon", "The panopticon is a design of institutional building with an inbuilt system of control, originated by the English philosopher and social theorist Jeremy Bentham." , "", "https://en.wikipedia.org/wiki/Panopticon");
+
         console.log(relatedArticlesBox.children);
     }
 
     if(suggestedArticlesBox)
     {
-        //AddSuggestedArticle("EEYYA im on tv", "family guy the Godfather episode", "", "");
+        //AddSuggestedArticle("Greece", "Greece,[a] officially the Hellenic Republic,[b] is a country in Southeast Europe, located on the southern tip of the Balkan peninsula." , "", "https://en.wikipedia.org/wiki/Greece");
+        //AddSuggestedArticle("Rock music", "Rock is a broad genre of popular music that originated as "rock and roll" in the United States in the late 1940s and early 1950s." , "", "https://en.wikipedia.org/wiki/Rock_music");
+
+        console.log(suggestedArticlesBox.children);
+    }
+}
+
+function ExampleArticles()
+{
+    ClearArticles();
+
+    if(relatedArticlesBox)
+    {
+        AddRelatedArticle("Water Bottle", "A water bottle is a container that is used to hold liquids, mainly water." , "", "https://en.wikipedia.org/wiki/Water_bottle");
+        AddRelatedArticle("Panopticon", "The panopticon is a design of institutional building with an inbuilt system of control, originated by the English philosopher and social theorist Jeremy Bentham." , "", "https://en.wikipedia.org/wiki/Panopticon");
+
+        console.log(relatedArticlesBox.children);
+    }
+
+    if(suggestedArticlesBox)
+    {
+        AddSuggestedArticle("Greece", "Greece,[a] officially the Hellenic Republic,[b] is a country in Southeast Europe, located on the southern tip of the Balkan peninsula." , "", "https://en.wikipedia.org/wiki/Greece");
+        AddSuggestedArticle("Rock music", "Rock is a broad genre of popular music that originated as \"rock and roll\" in the United States in the late 1940s and early 1950s." , "", "https://en.wikipedia.org/wiki/Rock_music");
 
         console.log(suggestedArticlesBox.children);
     }
